@@ -44,3 +44,13 @@ Chain também pode criar dependências aos pares para listas do mesmo tamanho (i
 chain(*[EmptyOperator(task_id=f"op{i}") for i in range(1, 6)])
 ```
 
+### Resumo Rápido das Dependências
+| Padrão                           | Significado                                  | Tipo                          |
+| -------------------------------- | -------------------------------------------- | ----------------------------- |
+| `A >> B`                         | A executa antes de B                         | Dependência simples           |
+| `A >> [B, C]`                    | A antes de B e C                             | Fan-out                       |
+| `A << B`                         | B antes de A                                 | Dependência simples invertida |
+| `A.set_downstream([B, C])`       | Igual ao `>>`                                | Programático                  |
+| `A.set_upstream(B)`              | Igual ao `<<`                                | Programático                  |
+| `cross_downstream(list1, list2)` | Cada task de list1 liga a cada task de list2 | Fan-out/fan-in múltiplo       |
+| `chain(A, B, C, D)`              | A → B → C → D                                | Pipeline linear               |
