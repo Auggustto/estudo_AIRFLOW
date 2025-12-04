@@ -1,6 +1,7 @@
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.sdk import cross_downstream
+from airflow.utils.helpers import cross_downstream
+
 from datetime import datetime
 
 with DAG("example_cross_downstream", start_date=datetime(2024, 1, 1), schedule=None):
